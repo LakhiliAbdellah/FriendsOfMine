@@ -19,8 +19,12 @@ class ActiviteServiceITest extends Specification {
     @Autowired ActiviteService activiteService
 
     def "test save a valid activite"() {
-        given: "a valid activite"
-        Activite natation = new Activite(titre: "natation")
+
+        given: "a responsable"
+        Utilisateur bob = new Utilisateur(nom: "Deniro", prenom: "bob", email: "bob@deniro.com",sexe: "M")
+
+        and: "a valid activite"
+        Activite natation = new Activite(titre: "natation", responsable: bob)
 
         when: "the activite is saved"
         activiteService.saveActivite(natation);
