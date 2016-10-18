@@ -27,6 +27,9 @@ class UtilisateurTest extends Specification {
         expect: "l'utilisateur est valide"
         validator.validate(utilisateur).empty
 
+        and: "il n'est proprietaire d'aucune activite"
+        !utilisateur.activites
+
         where:
         unNom    | unPrenom  | unEmail     | unSexe | uneDateNaissance
         "Dupont" | "Jeanne"  | "jd@jd.com" | "F"    | new Date(1972, 6, 17)

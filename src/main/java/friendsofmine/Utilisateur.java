@@ -2,13 +2,11 @@ package friendsofmine;
 
 import org.hibernate.validator.constraints.Email;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -34,6 +32,9 @@ public class Utilisateur {
 
     @NotNull @Pattern(regexp = "^[MF]{1}$")
     private String sexe ;
+
+    @OneToMany(mappedBy = "responsable")
+    private Collection<Activite> activites ;
 
     public String getNom() {
         return nom;
@@ -77,5 +78,13 @@ public class Utilisateur {
 
     public Long getId() {
         return id;
+    }
+
+    public Collection<Activite> getActivites() {
+        return activites;
+    }
+
+    public void setActivites(Collection<Activite> activites) {
+        this.activites = activites;
     }
 }
