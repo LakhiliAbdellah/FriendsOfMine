@@ -2,6 +2,7 @@ package friendsofmine;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 
@@ -11,7 +12,8 @@ import javax.annotation.PostConstruct;
 @Component
 public class Bootstrap {
 
-    @Autowired private ActiviteService activiteService;
+    @Autowired
+    private ActiviteService activiteService;
 
     private Utilisateur mary;
     private Utilisateur thom;
@@ -21,6 +23,7 @@ public class Bootstrap {
 
 
     @PostConstruct
+    @Transactional
     public void init() {
         initMary();
         initAndSaveRandonnee();
