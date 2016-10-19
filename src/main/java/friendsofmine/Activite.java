@@ -52,4 +52,12 @@ public class Activite {
     public void setResponsable(Utilisateur responsable) {
         this.responsable = responsable;
     }
+
+    @Override
+    public String toString() {
+        return "Activite{" +
+                "id=" + id +
+                ", titre='" + titre + '\'' +
+                '}';
+    }
 }

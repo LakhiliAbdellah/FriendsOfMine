@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -34,7 +35,7 @@ public class Utilisateur {
     private String sexe ;
 
     @OneToMany(mappedBy = "responsable")
-    private Collection<Activite> activites ;
+    private Collection<Activite> activites = new ArrayList<Activite>();
 
     public String getNom() {
         return nom;
