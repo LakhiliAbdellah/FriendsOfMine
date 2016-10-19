@@ -2,13 +2,13 @@ package friendsofmine;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.PostConstruct;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Bootstrap of the application
  */
 @Service
+@Transactional
 public class InitialisationService {
 
     @Autowired private ActiviteService activiteService;
