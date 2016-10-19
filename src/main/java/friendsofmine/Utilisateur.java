@@ -88,4 +88,13 @@ public class Utilisateur {
     public void setActivites(Collection<Activite> activites) {
         this.activites = activites;
     }
+
+    @Override
+    public String toString() {
+        return "Utilisateur{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                '}';
+    }
 }
