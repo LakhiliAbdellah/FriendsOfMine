@@ -23,8 +23,10 @@ public class ActiviteService {
         if (activite == null) {
             throw new IllegalArgumentException("Activite must not be null");
         }
-        if (activite.getResponsable() != null){
-            utilisateurRepository.save(activite.getResponsable()) ;
+        Utilisateur responsable = activite.getResponsable();
+        if (responsable != null){
+            utilisateurRepository.save(responsable);
+            responsable.getActivites().add(activite);
         }
         return  activiteRepository.save(activite) ;
     }

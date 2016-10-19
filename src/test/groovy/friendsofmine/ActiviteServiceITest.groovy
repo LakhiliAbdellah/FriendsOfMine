@@ -1,9 +1,7 @@
 package friendsofmine
 
-import friendsofmine.repositories.ActiviteRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.data.repository.PagingAndSortingRepository
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
@@ -31,6 +29,8 @@ class ActiviteServiceITest extends Specification {
 
         then: "the activite has an id"
         natation.id != null
+        bob.activites.size() == 1
+        bob.activites.first().titre == natation.titre
 
     }
 
