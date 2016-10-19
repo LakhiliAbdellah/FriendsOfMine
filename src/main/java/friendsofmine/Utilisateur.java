@@ -1,5 +1,6 @@
 package friendsofmine;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
@@ -34,7 +35,7 @@ public class Utilisateur {
     @NotNull @Pattern(regexp = "^[MF]{1}$")
     private String sexe ;
 
-    @OneToMany(mappedBy = "responsable")
+    @OneToMany(mappedBy = "responsable") @JsonIgnore
     private Collection<Activite> activites = new ArrayList<Activite>();
 
     public String getNom() {
