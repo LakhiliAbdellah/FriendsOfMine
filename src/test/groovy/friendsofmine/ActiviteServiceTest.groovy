@@ -30,7 +30,16 @@ class ActiviteServiceTest extends Specification {
         when: "the activite is saved"
         activiteService.saveActivite(activite);
 
-        then: "the save is delegated to the utilisateurRepository"
+        then: "the save is delegated to the activiteRepository"
         1 * activiteRepository.save(activite)
     }
+
+    def "test delegation of finding all activites to the repository"() {
+        when: "requesting for all activities"
+        activiteService.findAllActivites()
+
+        then: "the request is delegated to the activiteRepository"
+        1 * activiteRepository.findAll(_)
+    }
+
 }

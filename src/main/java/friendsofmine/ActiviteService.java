@@ -3,6 +3,7 @@ package friendsofmine;
 import friendsofmine.repositories.ActiviteRepository;
 import friendsofmine.repositories.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 /**
@@ -30,6 +31,15 @@ public class ActiviteService {
         }
         return  activiteRepository.save(activite) ;
     }
+
+    /**
+     * Find all activities sorted by titre
+     * @return an iterable on the sorted fetched collection
+     */
+    public Iterable<Activite> findAllActivites() {
+        return activiteRepository.findAll(new Sort(new Sort.Order(Sort.Direction.ASC,"titre")));
+    }
+
 
     public ActiviteRepository getActiviteRepository() {
         return activiteRepository;
