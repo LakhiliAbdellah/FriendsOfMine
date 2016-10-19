@@ -1,9 +1,7 @@
 package friendsofmine
 
-import friendsofmine.repositories.ActiviteRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.data.repository.PagingAndSortingRepository
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.transaction.annotation.Transactional
 import spock.lang.Specification
@@ -19,6 +17,7 @@ import javax.validation.ConstraintViolationException
 class ActiviteServiceITest extends Specification {
 
     @Autowired ActiviteService activiteService
+    @Autowired Bootstrap bootstrap
 
     def "test save a valid activite"() {
 
@@ -51,25 +50,33 @@ class ActiviteServiceITest extends Specification {
     }
 
     def "test findAllActivites"() {
-        given: "a responsable"
-        Utilisateur bob = new Utilisateur(nom: "Deniro", prenom: "bob", email: "bob@deniro.com",sexe: "M")
 
-        and: "3 activities"
-        activiteService.saveActivite(new Activite(titre: "natation", responsable: bob));
-        activiteService.saveActivite(new Activite(titre: "badmington", responsable: bob));
-        activiteService.saveActivite(new Activite(titre: "cinema", responsable: bob));
+        given: "2 utilisateurs"
+        bootstrap.mary
+        bootstrap.thom
+
+        and:  "3 activities"
+        bootstrap.lindyHop
+        bootstrap.randonnee
+        bootstrap.taekwondo
 
         when: "requesting all activites"
         Iterable<Activite> iterOnActivites = activiteService.findAllActivites()
         def activites = iterOnActivites as List<Activite>
 
-        then: "the result refernces 3 activites"
+        then: "the result references 3 activites"
         activites.size() == 3
 
         and: "the activities are sorted by titre"
-        activites[0].titre == "badmington"
-        activites[1].titre == "cinema"
-        activites[2].titre == "natation"
+        activites[0].titre == bootstrap.lindyHop.titre
+        activites[1].titre == bootstrap.randonnee.titre
+        activites[2].titre == bootstrap.taekwondo.titre
+
+        and: "fetched activites have the good responsable"
+        activites[0].responsable.nom == bootstrap.mary.nom
+        activites[1].responsable.nom == bootstrap.mary.nom
+        activites[2].responsable.nom == bootstrap.thom.nom
+
 
     }
 }
