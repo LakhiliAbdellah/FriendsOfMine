@@ -82,5 +82,9 @@ class ActiviteServiceITest extends Specification {
         activites[1].responsable.nom == initialisationService.mary.nom
         activites[2].responsable.nom == initialisationService.thom.nom
 
+        and: "Responsables have their activites"
+        initialisationService.mary.activites.size() == 2
+        initialisationService.thom.activites.size() == 1
+
     }
 }
