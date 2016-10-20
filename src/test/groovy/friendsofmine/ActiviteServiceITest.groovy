@@ -53,14 +53,17 @@ class ActiviteServiceITest extends Specification {
 
     def "test findAllActivites"() {
 
-        given: "2 utilisateurs"
-        bootstrap.mary
-        bootstrap.thom
+        given: "The instance of InitialisationService provided by the bootstrap object"
+        InitialisationService initialisationService = bootstrap.initialisationService
 
-        and:  "3 activities"
-        bootstrap.lindyHop
-        bootstrap.randonnee
-        bootstrap.taekwondo
+        and: "2 utilisateurs provided by the initialisation service"
+        initialisationService.mary
+        initialisationService.thom
+
+        and:  "3 activities provided by the initialisation service"
+        initialisationService.lindyHop
+        initialisationService.randonnee
+        initialisationService.taekwondo
 
         when: "requesting all activites"
         Iterable<Activite> iterOnActivites = activiteService.findAllActivites()
@@ -70,15 +73,18 @@ class ActiviteServiceITest extends Specification {
         activites.size() == 3
 
         and: "the activities are sorted by titre"
-        activites[0].titre == bootstrap.lindyHop.titre
-        activites[1].titre == bootstrap.randonnee.titre
-        activites[2].titre == bootstrap.taekwondo.titre
+        activites[0].titre == initialisationService.lindyHop.titre
+        activites[1].titre == initialisationService.randonnee.titre
+        activites[2].titre == initialisationService.taekwondo.titre
 
         and: "fetched activites have the good responsable"
-        activites[0].responsable.nom == bootstrap.mary.nom
-        activites[1].responsable.nom == bootstrap.mary.nom
-        activites[2].responsable.nom == bootstrap.thom.nom
+        activites[0].responsable.nom == initialisationService.mary.nom
+        activites[1].responsable.nom == initialisationService.mary.nom
+        activites[2].responsable.nom == initialisationService.thom.nom
 
+        and: "Responsables have their activites"
+        initialisationService.mary.activites.size() == 2
+        initialisationService.thom.activites.size() == 1
 
     }
 }

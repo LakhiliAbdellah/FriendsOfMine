@@ -39,7 +39,7 @@ class ActiviteServiceTest extends Specification {
         activiteService.findAllActivites()
 
         then: "the request is delegated to the activiteRepository"
-        1 * activiteRepository.findAll(_)
+        1 * activiteRepository.findAll()
     }
 
 }

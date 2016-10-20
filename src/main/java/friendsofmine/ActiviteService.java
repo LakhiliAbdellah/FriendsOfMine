@@ -37,7 +37,7 @@ public class ActiviteService {
      * @return an iterable on the sorted fetched collection
      */
     public Iterable<Activite> findAllActivites() {
-        return activiteRepository.findAll(new Sort(new Sort.Order(Sort.Direction.ASC,"titre")));
+        return activiteRepository.findAll();
     }
 
 
