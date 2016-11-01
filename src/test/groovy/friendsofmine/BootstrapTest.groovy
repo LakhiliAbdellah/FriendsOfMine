@@ -18,6 +18,7 @@ class BootstrapTest extends Specification {
 
         then: "the initialisation of activites is triggered on the initialisation service"
         1 * bootstrap.initialisationService.initActivites()
+        1 * bootstrap.initialisationService.initInscriptions()
 
     }
 
