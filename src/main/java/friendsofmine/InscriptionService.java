@@ -13,7 +13,6 @@ import java.util.Date;
 @Service
 public class InscriptionService {
 
-    @Autowired private UtilisateurRepository utilisateurRepository;
     @Autowired private InscriptionRepository inscriptionRepository;
 
     /**
@@ -24,10 +23,6 @@ public class InscriptionService {
     Inscription saveInscription(Inscription inscription) {
         if (inscription == null) {
             throw new IllegalArgumentException("Inscription must not be null");
-        }
-        Utilisateur utilisateur = inscription.getUtilisateur();
-        if (utilisateur != null){
-            utilisateurRepository.save(utilisateur);
         }
         inscription.setDateInscription(new Date());
         return inscriptionRepository.save(inscription) ;
