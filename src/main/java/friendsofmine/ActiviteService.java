@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 public class ActiviteService {
 
     @Autowired private ActiviteRepository activiteRepository ;
-    @Autowired private UtilisateurRepository utilisateurRepository;
 
     /**
      * Save the given activity
@@ -47,11 +46,4 @@ public class ActiviteService {
         this.activiteRepository = activiteRepository;
     }
 
-    public UtilisateurRepository getUtilisateurRepository() {
-        return utilisateurRepository;
-    }
-
-    public void setUtilisateurRepository(UtilisateurRepository utilisateurRepository) {
-        this.utilisateurRepository = utilisateurRepository;
-    }
 }
