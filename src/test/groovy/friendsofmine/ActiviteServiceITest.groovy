@@ -30,10 +30,28 @@ class ActiviteServiceITest extends Specification {
         when: "the activite is saved"
         activiteService.saveActivite(natation);
 
-        then: "the activite has an id"
+        then: "the activite has an id becaus it has been saved"
         natation.id != null
+
+        and: "bob has an id because it has been saved"
+        bob.id != null
+
+        and: "bob has an activite"
         bob.activites.size() == 1
         bob.activites.first().titre == natation.titre
+
+        when: "Creating a new activite with Bob as responsable"
+        Activite taekwondo = new Activite(titre: "taekwondo", responsable: bob)
+
+        and: "the activite is saved"
+        activiteService.saveActivite(taekwondo);
+
+        then: "the activite has an id becaus it has been saved"
+        taekwondo.id != null
+
+        and: "bob has two activites"
+        bob.activites.size() == 2
+        bob.activites.last().titre == taekwondo.titre
 
     }
 

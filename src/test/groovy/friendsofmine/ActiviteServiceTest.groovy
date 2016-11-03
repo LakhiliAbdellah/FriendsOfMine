@@ -25,7 +25,11 @@ class ActiviteServiceTest extends Specification {
 
     def "test delegation of save of an Activite to the repository"() {
         given: "an activite"
-        def activite = Mock(Activite)
+        def activite = Mock(Activite) {
+            getResponsable() >> Mock(Utilisateur) {
+                getActivites() >> []
+            }
+        }
 
         when: "the activite is saved"
         activiteService.saveActivite(activite);
