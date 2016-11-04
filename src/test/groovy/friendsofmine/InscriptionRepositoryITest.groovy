@@ -12,14 +12,13 @@ import spock.lang.*
 @ContextConfiguration
 @SpringBootTest
 @Transactional
-class InscriptionServiceITest extends Specification {
+class InscriptionRepositoryITest extends Specification {
 
     Activite uneActivite
     Utilisateur unUtilisateur
 
     @Autowired UtilisateurService utilisateurService
     @Autowired ActiviteService activiteService
-    @Autowired InscriptionService inscriptionService
     @Autowired InscriptionRepository inscriptionRepository
     @Autowired UtilisateurRepository utilisateurRepository
     @Autowired ActiviteRepository activiteRepository
@@ -44,7 +43,7 @@ class InscriptionServiceITest extends Specification {
 
 
         when: "on insert ou met à jour l'inscription"
-        Inscription resInscription = inscriptionService.saveInscription(uneInscription)
+        Inscription resInscription = inscriptionRepository.save(uneInscription)
 
         then: "l'inscription insérée est bien celle retournée"
         resInscription == uneInscription
@@ -64,23 +63,7 @@ class InscriptionServiceITest extends Specification {
         fetchInscription.dateInscription != null
     }
 
-    void "test de la suppression d'une inscription"() {
 
-        given:"une inscription existante en base"
-        Inscription uneInscription = new Inscription(activite: uneActivite, utilisateur: unUtilisateur)
-        inscriptionService.saveInscription(uneInscription)
-
-        when:"on déclenche la suppression de l'inscription"
-        inscriptionService.deleteInscription(uneInscription)
-
-        then:"l'inscription est supprimée de la base"
-        !inscriptionRepository.exists(uneInscription.id)
-
-        and:"ni l'activité, ni l'utilisateur ne sont supprimés"
-        activiteRepository.exists(uneActivite.id)
-        utilisateurRepository.exists(unUtilisateur.id)
-
-    }
 
     def "test initialisation of inscriptions by initialisation service"() {
 
@@ -100,8 +83,6 @@ class InscriptionServiceITest extends Specification {
         and:"Thom has subscribed randonnée"
         initialisationService.thomOnRandonnee.utilisateur == initialisationService.thom
         initialisationService.thomOnRandonnee.activite == initialisationService.randonnee
-
-
 
     }
 

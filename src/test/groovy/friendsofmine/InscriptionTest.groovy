@@ -68,4 +68,17 @@ class InscriptionTest extends Specification {
         !validator.validate(uneInscription).empty
     }
 
+    void "test le constructeur par défaut n'initialise pas la date d'inscription"() {
+        given:"un utilisateur et une activité"
+        Utilisateur unUtilisateur = Mock(Utilisateur)
+        Activite uneActivite = Mock(Activite)
+
+        when:"une inscription est créé"
+        Inscription uneInscription = new Inscription(utilisateur:unUtilisateur, activite: uneActivite)
+
+        then: "la date d'inscription n'est pas initialisée"
+        !uneInscription.dateInscription
+
+    }
+
 }

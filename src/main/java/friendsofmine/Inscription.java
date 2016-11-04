@@ -52,4 +52,9 @@ public class Inscription {
     public void setDateInscription(Date dateInscription) {
         this.dateInscription = dateInscription;
     }
+
+    @PrePersist
+    public void updateInscriptionDate() {
+        setDateInscription(new Date());
+    }
 }
