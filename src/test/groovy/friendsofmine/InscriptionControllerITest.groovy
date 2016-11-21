@@ -34,8 +34,8 @@ class InscriptionControllerITest extends Specification {
         then: "le retour fournit les informations de l'inscription créée"
         inscription.id
         inscription.dateInscription
-        inscription.activite.id == initialisationService.randonnee.id
-        inscription.utilisateur.id == initialisationService.mary.id
+        inscription.activite == initialisationService.randonnee
+        inscription.utilisateur == initialisationService.mary
 
 
     }

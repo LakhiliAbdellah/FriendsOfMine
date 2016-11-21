@@ -98,4 +98,30 @@ public class Utilisateur {
                 ", prenom='" + prenom + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Utilisateur that = (Utilisateur) o;
+
+        if (!nom.equals(that.nom)) return false;
+        if (prenom != null ? !prenom.equals(that.prenom) : that.prenom != null) return false;
+        if (!email.equals(that.email)) return false;
+        if (dateNaissance != null ? !dateNaissance.equals(that.dateNaissance) : that.dateNaissance != null)
+            return false;
+        return sexe != null ? sexe.equals(that.sexe) : that.sexe == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = nom.hashCode();
+        result = 31 * result + (prenom != null ? prenom.hashCode() : 0);
+        result = 31 * result + email.hashCode();
+        result = 31 * result + (dateNaissance != null ? dateNaissance.hashCode() : 0);
+        result = 31 * result + (sexe != null ? sexe.hashCode() : 0);
+        return result;
+    }
 }

@@ -57,4 +57,34 @@ public class Inscription {
     public void updateInscriptionDate() {
         setDateInscription(new Date());
     }
+
+    @Override
+    public String toString() {
+        return "Inscription{" +
+                "id=" + id +
+                ", utilisateur=" + utilisateur +
+                ", activite=" + activite +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Inscription that = (Inscription) o;
+
+        if (!utilisateur.equals(that.utilisateur)) return false;
+        if (!activite.equals(that.activite)) return false;
+        return dateInscription.equals(that.dateInscription);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = utilisateur.hashCode();
+        result = 31 * result + activite.hashCode();
+        result = 31 * result + dateInscription.hashCode();
+        return result;
+    }
 }

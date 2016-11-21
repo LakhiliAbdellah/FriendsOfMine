@@ -5,6 +5,7 @@ import friendsofmine.repositories.InscriptionRepository
 import friendsofmine.repositories.UtilisateurRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.data.domain.Example
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.transaction.annotation.Transactional
 import spock.lang.*
@@ -83,6 +84,24 @@ class InscriptionRepositoryITest extends Specification {
         and:"Thom has subscribed randonnée"
         initialisationService.thomOnRandonnee.utilisateur == initialisationService.thom
         initialisationService.thomOnRandonnee.activite == initialisationService.randonnee
+
+    }
+
+    def "test la recherche d'inscription"() {
+
+        given: "un exemple d'inscription : les inscriptions de thom"
+        Inscription inscription = new Inscription()
+        inscription.utilisateur = new Utilisateur()
+        inscription.utilisateur.nom = initialisationService.thom.nom
+        Example<Inscription> example = Example.of(inscription)
+
+        when: "on recherche les activités de thom"
+        List<Inscription> res = inscriptionRepository.findAll(example) as List<Inscription>
+
+        then: "la randonnée et le lindy hop sont trouvées"
+        res.size() == 2
+        res.contains(initialisationService.thomOnLindyhop);
+        res.contains(initialisationService.thomOnRandonnee);
 
     }
 

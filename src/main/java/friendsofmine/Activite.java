@@ -60,4 +60,25 @@ public class Activite {
                 ", titre='" + titre + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Activite activite = (Activite) o;
+
+        if (!titre.equals(activite.titre)) return false;
+        if (descriptif != null ? !descriptif.equals(activite.descriptif) : activite.descriptif != null) return false;
+        return responsable.equals(activite.responsable);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = titre.hashCode();
+        result = 31 * result + (descriptif != null ? descriptif.hashCode() : 0);
+        result = 31 * result + responsable.hashCode();
+        return result;
+    }
 }
