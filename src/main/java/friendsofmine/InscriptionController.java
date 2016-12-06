@@ -5,6 +5,7 @@ import friendsofmine.repositories.InscriptionRepository;
 import friendsofmine.repositories.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
@@ -41,14 +42,15 @@ public class InscriptionController {
     }
 
     @RequestMapping(value = "/api/v1/inscriptions/search", method = RequestMethod.GET)
-    public Iterable<Inscription> searchInscriptions(@RequestParam(value = "nom_utilisateur",required = false)String nomUtilisateur,
-                                                    @RequestParam(value = "titre_activite",required = false)String titreActivite,
-                                                    Pageable pageable) {
+    public Page<Inscription> searchInscriptions(@RequestParam(value = "nom_utilisateur",required = false)String nomUtilisateur,
+                                                @RequestParam(value = "titre_activite",required = false)String titreActivite,
+                                                Pageable pageable) {
         Example<Inscription> example = getInscriptionExample(nomUtilisateur, titreActivite);
-
-        Iterable<Inscription> res = inscriptionRepository.findAll(example, pageable);
+        Page<Inscription> res = inscriptionRepository.findAll(example, pageable);
         return res;
     }
+
+
 
     private Example<Inscription> getInscriptionExample(String nomUtilisateur, String titreActivite) {
         Inscription inscription = new Inscription();
