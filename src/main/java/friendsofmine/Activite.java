@@ -68,17 +68,17 @@ public class Activite {
 
         Activite activite = (Activite) o;
 
-        if (!titre.equals(activite.titre)) return false;
+        if (titre != null ? !titre.equals(activite.titre) : activite.titre != null) return false;
         if (descriptif != null ? !descriptif.equals(activite.descriptif) : activite.descriptif != null) return false;
-        return responsable.equals(activite.responsable);
+        return responsable != null ? responsable.equals(activite.responsable) : activite.responsable == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = titre.hashCode();
+        int result = titre != null ? titre.hashCode() : 0;
         result = 31 * result + (descriptif != null ? descriptif.hashCode() : 0);
-        result = 31 * result + responsable.hashCode();
+        result = 31 * result + (responsable != null ? responsable.hashCode() : 0);
         return result;
     }
 }

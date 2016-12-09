@@ -74,17 +74,17 @@ public class Inscription {
 
         Inscription that = (Inscription) o;
 
-        if (!utilisateur.equals(that.utilisateur)) return false;
-        if (!activite.equals(that.activite)) return false;
-        return dateInscription.equals(that.dateInscription);
+        if (utilisateur != null ? !utilisateur.equals(that.utilisateur) : that.utilisateur != null) return false;
+        if (activite != null ? !activite.equals(that.activite) : that.activite != null) return false;
+        return dateInscription != null ? dateInscription.equals(that.dateInscription) : that.dateInscription == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = utilisateur.hashCode();
-        result = 31 * result + activite.hashCode();
-        result = 31 * result + dateInscription.hashCode();
+        int result = utilisateur != null ? utilisateur.hashCode() : 0;
+        result = 31 * result + (activite != null ? activite.hashCode() : 0);
+        result = 31 * result + (dateInscription != null ? dateInscription.hashCode() : 0);
         return result;
     }
 }
